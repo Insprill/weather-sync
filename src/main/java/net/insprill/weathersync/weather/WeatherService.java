@@ -57,7 +57,13 @@ public class WeatherService {
         Response response = fetch(String.format(API_URL, this.apiKey, location));
         JsonObject json = new JsonParser().parse(response.getBody()).getAsJsonObject();
 
-        Preconditions.checkState(response.ok(), json.get("error").getAsJsonObject().get("message").getAsString());
+        if (!response.ok()) {
+            if (json.has("error")) {
+                throw new IllegalStateException(json.get("error").getAsJsonObject().get("message").getAsString());
+            } else {
+                throw new IllegalStateException(response.getBody());
+            }
+        }
 
         JsonObject current = json.get("current").getAsJsonObject();
         JsonObject condition = current.get("condition").getAsJsonObject();
