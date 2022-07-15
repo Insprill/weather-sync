@@ -40,7 +40,7 @@ public class WeatherService {
             Bukkit.getScheduler().runTask(this.plugin, () -> {
                 world.setStorm(status == WeatherStatus.STORM);
                 world.setThundering(status == WeatherStatus.RAIN);
-                world.setWeatherDuration(status == WeatherStatus.CLEAR ? 0 : Integer.MAX_VALUE);
+                world.setWeatherDuration(status == WeatherStatus.CLEAR ? Integer.MIN_VALUE : Integer.MAX_VALUE);
             });
         } catch (Exception e) {
             if (plugin.getConfig().getBoolean("debug")) {
