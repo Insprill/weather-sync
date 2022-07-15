@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.insprill.fetch4j.Response;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -54,6 +55,7 @@ public class WeatherService {
      * @return The {@link WeatherCode}.
      */
     private WeatherCode fetchWeatherCode(String location) {
+        Preconditions.checkState(!Bukkit.isPrimaryThread(), "Weather fetch cannot be done on the main thread!");
         Response response = fetch(String.format(API_URL, this.apiKey, location));
         JsonObject json = new JsonParser().parse(response.getBody()).getAsJsonObject();
 
