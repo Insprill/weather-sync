@@ -1,0 +1,16 @@
+# Your WeatherAPI api key. This can be found on your weatherapi.com dashboard.
+api-key: YOUR_KEY_HERE
+# The location to get the weather from. This support multiple different formats:
+#   - Latitude and Longitude | e.g: 40.4973611,-78.4888607
+#   - City name | e.g: Imola
+#   - US zipcode | e.g: 82010
+#   - UK postcode | e.g: SW1
+#   - Canadian postcode | e.g: G2J
+#   - IATA (3 digit airport code) | e.g: iata:DXB
+#   - Current IP address | e.g: auto:ip
+#   - IP address | e.g: 127.0.0.1
+# Default: auto:ip
+location: auto:ip
+# How often, in ticks, should the weather be updated?
+# Default: 36000 (30 minutes)
+update-rate: 36000
