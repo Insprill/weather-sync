@@ -72,7 +72,12 @@ public class WeatherService {
 
         JsonObject current = json.get("current").getAsJsonObject();
         JsonObject condition = current.get("condition").getAsJsonObject();
-        return WeatherCode.get(condition.get("code").getAsInt());
+        int code = condition.get("code").getAsInt();
+        WeatherCode weatherCode = WeatherCode.get(code);
+        if (weatherCode == null) {
+            throw new IllegalArgumentException("Unknown weather code " + code);
+        }
+        return weatherCode;
     }
 
 }
