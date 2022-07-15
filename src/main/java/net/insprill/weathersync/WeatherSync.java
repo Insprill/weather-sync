@@ -9,7 +9,7 @@ import java.util.logging.Level;
 
 public final class WeatherSync extends JavaPlugin {
 
-    private static final int MIN_UPDATE_RATE = 1200;
+    private static final int MIN_UPDATE_RATE = 1;
 
     private WeatherService weatherService;
 
@@ -19,7 +19,7 @@ public final class WeatherSync extends JavaPlugin {
 
         this.weatherService = new WeatherService(this, getConfig().getString("api-key"));
 
-        long updateRate = getConfig().getLong("update-rate");
+        long updateRate = getConfig().getLong("update-rate") * 20L * 60L;
         updateRate = Math.max(MIN_UPDATE_RATE, updateRate);
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, this::updateAllWeather, 0L, updateRate);
     }

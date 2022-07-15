@@ -1,9 +1,9 @@
 # Your WeatherAPI api key. This can be found on your weatherapi.com dashboard.
 api-key: YOUR_KEY_HERE
 
-# How often, in ticks, should the weather be updated?
-# Default: 36000 (30 minutes)
-update-rate: 36000
+# How often, in minutes, should the weather be updated?
+# Default: 30
+update-rate: 30
 
 # Settings for all server worlds.
 worlds:
