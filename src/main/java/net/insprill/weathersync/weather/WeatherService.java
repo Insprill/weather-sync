@@ -8,6 +8,8 @@ import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+
 import static net.insprill.fetch4j.Fetch.fetch;
 
 public class WeatherService {
@@ -37,7 +39,11 @@ public class WeatherService {
             world.setThundering(status == WeatherStatus.RAIN);
             world.setWeatherDuration(status == WeatherStatus.CLEAR ? 0 : Integer.MAX_VALUE);
         } catch (Exception e) {
-            plugin.getLogger().severe("Failed to update weather: " + e.getMessage());
+            if (plugin.getConfig().getBoolean("debug")) {
+                plugin.getLogger().log(Level.SEVERE, "Failed to update weather", e);
+            } else {
+                plugin.getLogger().severe("Failed to update weather: " + e.getMessage());
+            }
         }
     }
 
