@@ -21,6 +21,13 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
 }
 
+shadowJar {
+    archiveClassifier.set('')
+
+    minimize()
+}
+build.dependsOn shadowJar
+
 processResources {
     def props = [version: version]
     inputs.properties props
