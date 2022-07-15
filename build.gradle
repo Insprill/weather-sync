@@ -26,6 +26,8 @@ dependencies {
 shadowJar {
     archiveClassifier.set('')
 
+    relocate("net.insprill.fetch4j", "net.insprill.weathersync.libs.net.insprill.fetch4j")
+
     minimize()
 }
 build.dependsOn shadowJar
