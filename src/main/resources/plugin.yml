@@ -1,0 +1,5 @@
+name: Weather-Sync
+version: '${version}'
+main: net.insprill.weathersync.WeatherSync
+api-version: 1.13
+authors: [ Insprill ]
