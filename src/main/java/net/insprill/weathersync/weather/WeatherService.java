@@ -36,9 +36,11 @@ public class WeatherService {
         try {
             WeatherCode weatherCode = fetchWeatherCode(location);
             WeatherStatus status = weatherCode.getStatus();
-            world.setStorm(status == WeatherStatus.STORM);
-            world.setThundering(status == WeatherStatus.RAIN);
-            world.setWeatherDuration(status == WeatherStatus.CLEAR ? 0 : Integer.MAX_VALUE);
+            Bukkit.getScheduler().runTask(this.plugin, () -> {
+                world.setStorm(status == WeatherStatus.STORM);
+                world.setThundering(status == WeatherStatus.RAIN);
+                world.setWeatherDuration(status == WeatherStatus.CLEAR ? 0 : Integer.MAX_VALUE);
+            });
         } catch (Exception e) {
             if (plugin.getConfig().getBoolean("debug")) {
                 plugin.getLogger().log(Level.SEVERE, "Failed to update weather", e);
