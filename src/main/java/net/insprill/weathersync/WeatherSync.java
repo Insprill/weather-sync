@@ -21,7 +21,7 @@ public final class WeatherSync extends JavaPlugin {
 
         long updateRate = getConfig().getLong("update-rate");
         updateRate = Math.max(MIN_UPDATE_RATE, updateRate);
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, this::updateAllWeather, 0, updateRate);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, this::updateAllWeather, 0L, updateRate);
     }
 
     /**
