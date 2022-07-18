@@ -9,14 +9,14 @@ import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.net.URLEncoder;
 import java.util.logging.Level;
 
 import static net.insprill.fetch4j.Fetch.fetch;
+import static net.insprill.fetch4j.Params.params;
 
 public class WeatherService {
 
-    private static final String API_URL = "https://api.weatherapi.com/v1/current.json?key=%s&q=%s";
+    private static final String API_URL = "https://api.weatherapi.com/v1/current.json";
 
     private final Plugin plugin;
     private final String apiKey;
@@ -59,7 +59,7 @@ public class WeatherService {
      */
     private WeatherCode fetchWeatherCode(String location) {
         Preconditions.checkState(!Bukkit.isPrimaryThread(), "Weather fetch cannot be done on the main thread!");
-        Response response = fetch(String.format(API_URL, URLEncoder.encode(this.apiKey), URLEncoder.encode(location)));
+        Response response = fetch(API_URL, params().query("key", this.apiKey).query("q", location));
         JsonObject json = new JsonParser().parse(response.getBody()).getAsJsonObject();
 
         if (!response.ok()) {
