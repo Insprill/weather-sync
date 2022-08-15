@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
@@ -32,12 +34,15 @@ configurations {
 
 shadowJar {
     archiveClassifier.set('')
-
-    relocate("net.insprill.fetch4j", "net.insprill.weathersync.libs.net.insprill.fetch4j")
-
     minimize()
 }
 build.dependsOn shadowJar
+
+task relocateShadowJar(type: ConfigureShadowRelocation) {
+    target = tasks.shadowJar
+    prefix = "net.insprill.weathersync.libs"
+}
+shadowJar.dependsOn relocateShadowJar
 
 processResources {
     def props = [version: version]
